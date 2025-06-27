@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anonymous Compliment Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; text-align: center; }
+    #compliment { font-size: 1.5rem; margin: 2rem; color: #4CAF50; }
+    button { font-size: 1.2rem; padding: 0.5rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Anonymous Compliment Generator</h1>
+  <p>Click the button to get a random compliment!</p>
+  <button onclick="getCompliment()">Show Compliment</button>
+  <div id="compliment">Your compliment will appear here.</div>
+  <p>Want to add your own compliment? <a href="https://forms.gle/S76a8YD3CwQQBZPf6
+" target="_blank">Submit here</a>.</p>
+
+  <script>
+    let compliments = [];
+
+    // Replace YOUR_CSV_LINK below with your Google Sheets CSV link
+    const sheetCSVUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCw7Cr3ZRatXYX4d_ajbGTPgrqrK_XfUolMpceWZ7nJT2jMh5YeX6z0CZcpxQ8dFyGofwQWj6-E895/pub?gid=1764668867&single=true&output=csv";
+
+    fetch(sheetCSVUrl)
+      .then(response => response.text())
+      .then(data => {
+        const lines = data.split('\n');
+        for (let i = 1; i < lines.length; i++) {
+          let line = lines[i].trim();
+          if (line) compliments.push(line);
+        }
+      })
+      .catch(() => {
+        document.getElementById('compliment').textContent = "Failed to load compliments.";
+      });
+
+    function getCompliment() {
+      if (compliments.length === 0) {
+        document.getElementById('compliment').textContent = "No compliments available yet!";
+        return;
+      }
+      const randomIndex = Math.floor(Math.random() * compliments.length);
+      document.getElementById('compliment').textContent = compliments[randomIndex];
+    }
+  </script>
+</body>
+</html>
