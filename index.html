@@ -1,48 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Anonymous Compliment Generator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CDB Official</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 2rem; text-align: center; }
-    #compliment { font-size: 1.5rem; margin: 2rem; color: #4CAF50; }
-    button { font-size: 1.2rem; padding: 0.5rem 1rem; }
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #00ffcc;
+      margin-bottom: 0.2em;
+    }
+
+    h2 {
+      font-weight: normal;
+      color: #aaa;
+      margin-top: 0;
+    }
+
+    .links a {
+      color: #00ffcc;
+      text-decoration: none;
+      margin: 0 1em;
+      font-size: 1.2rem;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 0.9rem;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>Anonymous Compliment Generator</h1>
-  <p>Click the button to get a random compliment!</p>
-  <button onclick="getCompliment()">Show Compliment</button>
-  <div id="compliment">Your compliment will appear here.</div>
-  <p>Want to add your own compliment? <a href="https://forms.gle/S76a8YD3CwQQBZPf6
-" target="_blank">Submit here</a>.</p>
+  <h1>CDB Official</h1>
+  <h2>Coder • Bot Maker • Bloxd.io Player</h2>
 
-  <script>
-    let compliments = [];
+  <div class="links">
+    <a href="https://cdbofficial.github.io/Random-Compliment-Website" target="_blank">Compliment Generator</a>
+    <a href="https://discord.gg/your-invite" target="_blank">Discord</a>
+    <a href="https://github.com/CDBofficial" target="_blank">GitHub</a>
+  </div>
 
-    // Replace YOUR_CSV_LINK below with your Google Sheets CSV link
-    const sheetCSVUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQCw7Cr3ZRatXYX4d_ajbGTPgrqrK_XfUolMpceWZ7nJT2jMh5YeX6z0CZcpxQ8dFyGofwQWj6-E895/pub?gid=1764668867&single=true&output=csv";
-
-    fetch(sheetCSVUrl)
-      .then(response => response.text())
-      .then(data => {
-        const lines = data.split('\n');
-        for (let i = 1; i < lines.length; i++) {
-          let line = lines[i].trim();
-          if (line) compliments.push(line);
-        }
-      })
-      .catch(() => {
-        document.getElementById('compliment').textContent = "Failed to load compliments.";
-      });
-
-    function getCompliment() {
-      if (compliments.length === 0) {
-        document.getElementById('compliment').textContent = "No compliments available yet!";
-        return;
-      }
-      const randomIndex = Math.floor(Math.random() * compliments.length);
-      document.getElementById('compliment').textContent = compliments[randomIndex];
-    }
-  </script>
+  <div class="footer">
+    Built with 💚 by CDB
+  </div>
 </body>
 </html>
